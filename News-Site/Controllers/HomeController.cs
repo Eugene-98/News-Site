@@ -6,7 +6,7 @@ namespace News_Site.Controllers
 {
 	public class HomeController : Controller
 	{
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "admin, user")]
 		public IActionResult Index()
 		{
 			string role = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;

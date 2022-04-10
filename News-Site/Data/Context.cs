@@ -7,6 +7,7 @@ namespace News_Site.Data
 	{
 		public DbSet<User> Users { get; set; }
 		public DbSet<Role> Roles { get; set; }
+		public DbSet<News> News { get; set; }
 
 		public Context(DbContextOptions<Context> options)
 		: base(options)

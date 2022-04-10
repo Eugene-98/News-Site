@@ -12,7 +12,6 @@ namespace News_Site.Controllers;
 public class AccountController : Controller
 {
 	private readonly Context _context;
-	private int NextId = 10;
 
 	public AccountController(Context context)
 	{
@@ -76,7 +75,7 @@ public class AccountController : Controller
 			{
 				await Authenticate(user);
 
-				return RedirectToAction("Index", "Home");
+				return Redirect("~/Home/Index");
 			}
 			ModelState.AddModelError("", "Invalid username or password");
 		}
@@ -88,7 +87,7 @@ public class AccountController : Controller
 		var claims = new List<Claim>
 			{
 				new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username),
-				new Claim(ClaimsIdentity.DefaultNameClaimType, user.Role.Name)
+				new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
 			};
 
 		ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
