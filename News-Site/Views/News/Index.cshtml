@@ -1,70 +1,21 @@
 ﻿@model IEnumerable<News_Site.Models.News>
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Hello React</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NewsName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewsHeader)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewsSubtitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewsImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewsText)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsHeader)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsSubtitle)
-            </td>
-            <td>
-                @if (item.NewsImage != null)
-                {
-                    <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.NewsImage))" />
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsText)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NewsId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NewsId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NewsId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+@Html.React("NewsBox", new
+{
+    initialData = Model,
+    url = Url.Action("Index"),
+    pollInterval=2000,
+})
+<div id="content"></div>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+<script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+<script src="@Url.Content("~/js/index.jsx")"></script>
+@Html.ReactInitJavaScript()
 </body>
 </html>

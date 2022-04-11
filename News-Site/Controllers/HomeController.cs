@@ -6,10 +6,14 @@ namespace News_Site.Controllers
 {
 	public class HomeController : Controller
 	{
-		[Authorize(Roles = "admin, user")]
 		public IActionResult Index()
 		{
 			return View();
+		}
+
+		public IActionResult GetNews()
+		{
+			return Redirect("~/News");
 		}
 	}
 }

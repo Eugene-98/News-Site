@@ -1,15 +1,35 @@
-﻿@{
-    Layout = null;
-}
+﻿@model IEnumerable<News_Site.Models.News>
 <html>
 <head>
     <title>Hello React</title>
 </head>
 <body>
+@Html.React("NewsBox", new
+{
+    initialData = Model,
+    url = Url.Action("GetNews"),
+    pollInterval=2000,
+})
 <div id="content"></div>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
-<script crossorigin src="https://unpkg.com/react/umd/react.production.min.js" ></script>
-<script src="/js/index.jsx"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+<script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+
+<script
+    src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+    crossorigin></script>
+
+<script
+    src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+    crossorigin></script>
+<script>var Form = ReactBootstrap.Form</script>
+<script>var Button = ReactBootstrap.Button</script>
+<script>var Group = ReactBootstrap.Group</script>
+<script>var Label = ReactBootstrap.Lable</script>
+<script>var Control = ReactBootstrap.Control</script>
+<script>var Text = ReactBootstrap.Text</script>
+<script src="@Url.Content("~/js/index.jsx")"></script>
+@Html.ReactInitJavaScript()
 </body>
 </html>

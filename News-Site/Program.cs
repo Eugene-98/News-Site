@@ -12,7 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("Online_storeContext")));
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+	.AddNewtonsoftJson(options =>
+		options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+	);
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 	.AddCookie(options =>
@@ -40,7 +43,12 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
-app.UseReact(config => { });
+app.UseReact(config =>
+{
+	config
+		.AddScript("~/js/index.jsx")
+		.AddScript("~/js/remarkable.min.js");
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
