@@ -16,10 +16,12 @@ namespace News_Site.Controllers
     public class NewsController : Controller
     {
         private readonly Context _context;
+        IWebHostEnvironment _appEnvironment;
 
-        public NewsController(Context context)
+        public NewsController(Context context, IWebHostEnvironment appEnvironment)
         {
             _context = context;
+            _appEnvironment = appEnvironment;
         }
 
         // GET: News
@@ -56,7 +58,7 @@ namespace News_Site.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NewsViewModel model)
+        public async Task<IActionResult> Create(NewsViewModel model, IFormFile uploadedFile)
         {
             if (ModelState.IsValid)
             {
@@ -67,15 +69,17 @@ namespace News_Site.Controllers
                     NewsSubtitle = model.NewsSubtitle,
                     NewsText = model.NewsText,
 	            };
-	            if (model.NewsImage != null)
+	            if (uploadedFile != null)
 	            {
-		            byte[] imageBytes = null;
-		            using (var binaryReader = new BinaryReader(model.NewsImage.OpenReadStream()))
-		            {
-			            imageBytes = binaryReader.ReadBytes((int)model.NewsImage.Length);
-		            }
+		            string path = "/Files/" + uploadedFile.FileName;
 
-		            news.NewsImage = imageBytes;
+		            using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+		            {
+			            await uploadedFile.CopyToAsync(fileStream);
+                    }
+
+		            news.NewsImageName = uploadedFile.FileName;
+                    news.NewsImagePath = path;
 	            }
 
                 _context.News.Add(news);
@@ -111,7 +115,7 @@ namespace News_Site.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NewsId,NewsName,NewsHeader,NewsSubtitle,NewsImage,NewsText")] News news)
+        public async Task<IActionResult> Edit(int id,  News news)
         {
             if (id != news.NewsId)
             {

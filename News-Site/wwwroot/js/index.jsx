@@ -11,7 +11,7 @@ class News extends React.Component {
     rawMarkup() {
         var md = createRemarkable();
         var rawMarkup = md.render(this.props.children.toString());
-        return { __html: rawMarkup };
+        return {__html: rawMarkup};
     }
 
     render() {
@@ -25,11 +25,24 @@ class News extends React.Component {
 class NewsList extends React.Component {
     render() {
         const newsNodes = this.props.data.map(news => (
-            <News name={news.name}>
-                {news.text}
+            <News name={news.newsName}>
+                {news.newsHeader}
+                {news.newsSubtitle}
+                {news.newsImagePath}
+                {news.newsText}
             </News>
         ));
-        return <div className="newsList">{newsNodes}</div>;
+        const pic = '..' + this.props.data.map(path => (
+            <News name={path.pathName}>
+                {news.newsImagePath}
+            </News>
+        ));
+        return (
+            <div className="newsList" >
+                {newsNodes}
+                <img src={pic}/>
+            </div >
+            );
     }
 }
 class NewsBox extends React.Component {
