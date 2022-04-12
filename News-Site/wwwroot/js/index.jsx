@@ -40,22 +40,22 @@ class NewsList extends React.Component {
                 {news.newsText}
             </News>
         ));
-        const newsImage = this.props.data.map(newsI => (
-            <img src={newsI.newsImagePath} />
+        const newsImage = this.props.data.map(news => (
+            <img src={news.newsImagePath} />
             ));
         
         return (
             
-                <Card style={{ width: '18rem' }} className="newsList">
-                <Card.Img variant="top" src={newsImage} />
-                    <Card.Body>
-                    <Card.Title>{newsHeader}</Card.Title>
-                    <Card.Text>
+            <div style={{ width: '18rem' }} className="newsList">
+                {newsImage}
+                <body>
+                    <title>{newsHeader}</title>
+                    <text>
                         {newsText}
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>
+                    </text>
+                    <button variant="primary">Go somewhere</button>
+                </body>
+                </div>
             );
     }
 }

@@ -1,22 +1,9 @@
 ﻿@model IEnumerable<News_Site.Models.News>
 <html>
 <head>
-    <title>Hello React</title>
+    <title>News</title>
 </head>
 <body>
-    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
-<script
-    src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
-    crossorigin></script>
-<script
-    src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-    crossorigin></script>
-<script>var Card = ReactBootstrap.Card;</script>
-<script>var Img = ReactBootstrap.Img;</script>
-<script>var Body = ReactBootstrap.Body;</script>
-<script>var Title = ReactBootstrap.Title;</script>
-<script>var Button = ReactBootstrap.Button;</script>
-<script>var Text = ReactBootstrap.Text;</script>
 @Html.React("NewsBox", new
 {
     initialData = Model,
