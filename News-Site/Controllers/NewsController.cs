@@ -77,9 +77,9 @@ namespace News_Site.Controllers
 		            {
 			            await uploadedFile.CopyToAsync(fileStream);
                     }
-
+ 
 		            news.NewsImageName = uploadedFile.FileName;
-                    news.NewsImagePath = path;
+                    news.NewsImagePath = "https://localhost:7245" + path;
 	            }
 
                 _context.News.Add(news);

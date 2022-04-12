@@ -1,4 +1,5 @@
-﻿function createRemarkable() {
+﻿
+function createRemarkable() {
     var remarkable =
         'undefined' != typeof global && global.Remarkable
             ? global.Remarkable
@@ -24,24 +25,37 @@ class News extends React.Component {
 }
 class NewsList extends React.Component {
     render() {
-        const newsNodes = this.props.data.map(news => (
+        const newsHeader = this.props.data.map(news => (
             <News name={news.newsName}>
                 {news.newsHeader}
+            </News>
+        ));
+        const newsSubtitle = this.props.data.map(news => (
+            <News name={news.newsName}>
                 {news.newsSubtitle}
-                {news.newsImagePath}
+            </News>
+        ));
+        const newsText = this.props.data.map(news => (
+            <News name={news.newsName}>
                 {news.newsText}
             </News>
         ));
-        const pic = '..' + this.props.data.map(path => (
-            <News name={path.pathName}>
-                {news.newsImagePath}
-            </News>
-        ));
+        const newsImage = this.props.data.map(newsI => (
+            <img src={newsI.newsImagePath} />
+            ));
+        
         return (
-            <div className="newsList" >
-                {newsNodes}
-                <img src={pic}/>
-            </div >
+            
+                <Card style={{ width: '18rem' }} className="newsList">
+                <Card.Img variant="top" src={newsImage} />
+                    <Card.Body>
+                    <Card.Title>{newsHeader}</Card.Title>
+                    <Card.Text>
+                        {newsText}
+                        </Card.Text>
+                        <Button variant="primary">Go somewhere</Button>
+                    </Card.Body>
+                </Card>
             );
     }
 }

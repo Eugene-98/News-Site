@@ -4,6 +4,19 @@
     <title>Hello React</title>
 </head>
 <body>
+    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+<script
+    src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+    crossorigin></script>
+<script
+    src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+    crossorigin></script>
+<script>var Card = ReactBootstrap.Card</script>
+<script>var Img = ReactBootstrap.Img</script>
+<script>var Body = ReactBootstrap.Body</script>
+<script>var Title = ReactBootstrap.Title</script>
+<script>var Button = ReactBootstrap.Button</script>
+<script>var Text = ReactBootstrap.Text</script>
 @Html.React("NewsBox", new
 {
     initialData = Model,
@@ -15,6 +28,7 @@
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
 <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+
 <script src="@Url.Content("~/js/index.jsx")"></script>
 @Html.ReactInitJavaScript()
 </body>
