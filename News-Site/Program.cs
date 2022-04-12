@@ -47,7 +47,9 @@ app.UseReact(config =>
 {
 	config
 		.AddScript("~/js/index.jsx")
-		.AddScript("~/js/remarkable.min.js");
+		.AddScript("~/js/remarkable.min.js")
+		.AddScript("~/lib/bootstrap/dist/js/bootstrap.esm.js")
+		.AddScript("~/lib/bootstrap/dist/js/bootstrap.min.js");
 });
 
 app.UseHttpsRedirection();
